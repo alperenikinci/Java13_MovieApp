@@ -7,3 +7,8 @@
 
 # Bir login metodu yazalım. Repository'de email ve şifreye göre kullanıcı dönen bir metot yazılması gerekmektedir.
 # Veritabanında bu kullanıcı var ise, sisteme giriş yapabiliyor olmalıyım.
+
+
+# Login metodunu Dto ile tekrar yazalım. -> loginDto()
+
+# Register metodunu mapper kullanarak yeniden yazalım.
