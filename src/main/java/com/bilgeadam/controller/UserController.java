@@ -103,5 +103,24 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllByEmailContainingIgnoreCase(value));
     }
 
+    @GetMapping("/password-longer-than")
+    public ResponseEntity<List<User>> passwordLongerThan(Integer number) {
+        return ResponseEntity.ok(userService.passwordLongerThan(number));
+    }
+
+    @GetMapping("/password-longer-than-no-param")
+    public ResponseEntity<List<User>> passwordLongerThanNoParam(Integer number) {
+        return ResponseEntity.ok(userService.passwordLongerThanNoParam(number));
+    }
+
+    @GetMapping("/password-longer-than-jpql")
+    public ResponseEntity<List<User>> passwordLongerThanJPQL(Integer number) {
+        return ResponseEntity.ok(userService.passwordLongerThanJPQL(number));
+    }
+
+    @GetMapping("/find-all-by-email-ending-with")
+    public ResponseEntity<List<User>> findAllByEmailEndingWith(String value) {
+        return ResponseEntity.ok(userService.findAllByEmailEndingWith(value));
+    }
 
 }

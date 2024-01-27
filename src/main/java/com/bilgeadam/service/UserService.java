@@ -11,6 +11,7 @@ import com.bilgeadam.utility.EStatus;
 import com.bilgeadam.utility.EUserType;
 import com.bilgeadam.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -149,13 +150,13 @@ public class UserService implements ICrudService<User, Long> {
         User user = UserMapper.INSTANCE.fromRegisterRequestDtoToUser(dto);
 
         /* Burada else if yapısı kurarak ba.admin@email.com'u tekrar edebilir bir yapıya getirdim.
-        * Ancak bunun dışında alan bütün e-mailler unique olmak zorunda kaldı. Sonrasındaysa şifre kontrolümü
-        * her iki durum(admin maili ya da user maili) için de yine değerlendiriyorum. Akış şu şekilde;
-        * admin e-maili mi? True/False? -> true ise ->> şifrelerin uyuşma durumunu kontrol et.
-        * admin e-maili mi? True/False? -> false ise ->> girilen email sistemde kayıtlı mı?
-        *   True ->> Hata fırlat
-        *   False ->> şifrelerin uyuşma durumunu kontrol et.
-        * */
+         * Ancak bunun dışında alan bütün e-mailler unique olmak zorunda kaldı. Sonrasındaysa şifre kontrolümü
+         * her iki durum(admin maili ya da user maili) için de yine değerlendiriyorum. Akış şu şekilde;
+         * admin e-maili mi? True/False? -> true ise ->> şifrelerin uyuşma durumunu kontrol et.
+         * admin e-maili mi? True/False? -> false ise ->> girilen email sistemde kayıtlı mı?
+         *   True ->> Hata fırlat
+         *   False ->> şifrelerin uyuşma durumunu kontrol et.
+         * */
         if (dto.getEmail().equalsIgnoreCase("ba.admin@email.com")) {
             user.setStatus(EStatus.ACTIVE);
             user.setUserType(EUserType.ADMIN);
@@ -193,4 +194,21 @@ public class UserService implements ICrudService<User, Long> {
     public List<User> findAllByEmailContainingIgnoreCase(String value) {
         return userRepository.findAllByEmailContainingIgnoreCase(value);
     }
+
+    public List<User> passwordLongerThan(Integer number) {
+        return userRepository.passwordLongerThan(number);
+    }
+
+    public List<User> passwordLongerThanNoParam(Integer number) {
+        return userRepository.passwordLongerThanNoParam(number);
+    }
+
+    public List<User> passwordLongerThanJPQL(Integer number) {
+        return userRepository.passwordLongerThanJPQL(number);
+    }
+
+    public List<User> findAllByEmailEndingWith(String value) {
+        return userRepository.findAllByEmailEndingWith(value);
+    }
+
 }
