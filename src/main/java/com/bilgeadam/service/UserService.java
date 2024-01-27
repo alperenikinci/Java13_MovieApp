@@ -152,4 +152,28 @@ public class UserService implements ICrudService<User,Long> {
         userRepository.save(user);
         return UserMapper.INSTANCE.fromUserToRegisterResponseDto(user);
     }
+
+    public List<User> findAllByOrderByName(){
+        return userRepository.findAllByOrderByName();
+    }
+
+    public Boolean existsByNameContainsIgnoreCase(String name){
+        return userRepository.existsByNameContainsIgnoreCase(name);
+    }
+
+    public List<User> findAllByNameContainingIgnoreCase(String value){
+        return userRepository.findAllByNameContainingIgnoreCase(value);
+    }
+
+    public List<User> findByEmailIgnoreCase(String email){
+        return userRepository.findByEmailIgnoreCase(email);
+    }
+
+    public Optional<User> findOptionalByEmailIgnoreCase(String email){
+        return userRepository.findOptionalByEmailIgnoreCase(email);
+    }
+
+    public List<User> findAllByEmailContainingIgnoreCase(String value){
+        return userRepository.findAllByEmailContainingIgnoreCase(value);
+    }
 }
