@@ -37,6 +37,7 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteById(id));
     }
 
+
     //basic register
     @PostMapping("/register")
     public ResponseEntity<User> register(String name, String surname, String email, String password, String rePassword) {
@@ -124,6 +125,11 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllByEmailEndingWith(value));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<User> update(User user){
+        return ResponseEntity.ok(userService.update(user));
+    }
+
     @PostMapping("/update-dto")
     public ResponseEntity<User> updateDto(UserUpdateRequestDto dto) {
         return ResponseEntity.ok(userService.updateDto(dto));
@@ -133,4 +139,6 @@ public class UserController {
     public ResponseEntity<User> updateMapper(UserUpdateRequestDto dto) {
         return ResponseEntity.ok(userService.updateMapper(dto));
     }
+
+
 }

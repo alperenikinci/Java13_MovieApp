@@ -31,7 +31,7 @@ public class UserService implements ICrudService<User, Long> {
 
     @Override
     public User update(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     // Güncellemeye başka parametre gelirse ne olacak?
