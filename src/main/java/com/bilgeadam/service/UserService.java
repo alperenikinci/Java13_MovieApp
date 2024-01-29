@@ -6,6 +6,8 @@ import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.entity.User;
+import com.bilgeadam.exception.ErrorType;
+import com.bilgeadam.exception.MovieAppException;
 import com.bilgeadam.mapper.UserMapper;
 import com.bilgeadam.repository.UserRepository;
 import com.bilgeadam.utility.EStatus;
@@ -60,7 +62,7 @@ public class UserService implements ICrudService<User, Long> {
 
     @Override
     public Iterable<User> saveAll(Iterable<User> t) {
-        return null;
+        return userRepository.saveAll(t);
     }
 
     @Override
@@ -149,7 +151,7 @@ public class UserService implements ICrudService<User, Long> {
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
 
         if (optionalUser.isEmpty()) {
-            throw new RuntimeException("Email veya Şifre hatalıdır.");
+            throw new MovieAppException(ErrorType.LOGIN_ERROR);
         }
 
 //        User user = optionalUser.get();
@@ -165,7 +167,7 @@ public class UserService implements ICrudService<User, Long> {
         Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
 
         if (optionalUser.isEmpty()) {
-            throw new RuntimeException("Email veya Şifre hatalıdır.");
+            throw new MovieAppException(ErrorType.LOGIN_ERROR,"domates patates");
         }
         return UserMapper.INSTANCE.fromUserToLoginResponseDto(optionalUser.get());
     }

@@ -12,11 +12,8 @@ public enum ErrorType {
     USER_NOT_FOUND(4101,"Boyle bir kullanıcı bulunamadı",HttpStatus.NOT_FOUND),
     LOGIN_ERROR(4102 ,"Kullanıcı adı veya şifre hatalıdır!!!!",HttpStatus.BAD_REQUEST),
 
-    MOVIE_NOT_FOUND(4201,"Boyle bir film  bulunamadı",HttpStatus.NOT_FOUND)
-
-
-    ;
-   private  int code;
+    MOVIE_NOT_FOUND(4201,"Boyle bir film  bulunamadı",HttpStatus.NOT_FOUND);
+    private  int code;
     private String message;
     HttpStatus httpStatus;
 }

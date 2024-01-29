@@ -35,7 +35,7 @@ public class Movie {
     @ElementCollection
     private List<Long> genres;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Long> comments;
 
 

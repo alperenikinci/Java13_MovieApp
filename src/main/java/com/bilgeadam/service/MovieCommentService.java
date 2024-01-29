@@ -33,7 +33,7 @@ public class MovieCommentService implements ICrudService<MovieComment, Long> {
 
     @Override
     public Iterable<MovieComment> saveAll(Iterable<MovieComment> t) {
-        return null;
+        return movieCommentRepository.saveAll(t);
     }
 
     @Override

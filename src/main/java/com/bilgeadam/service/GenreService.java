@@ -6,6 +6,7 @@ import com.bilgeadam.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class GenreService implements ICrudService<Genre,Long> {
 
     @Override
     public Iterable<Genre> saveAll(Iterable<Genre> t) {
-        return null;
+        return genreRepository.saveAll(t);
     }
 
     @Override
@@ -43,5 +44,20 @@ public class GenreService implements ICrudService<Genre,Long> {
     @Override
     public List<Genre> findAll() {
         return genreRepository.findAll();
+    }
+
+    public List<Long> createGenresWithNames(List<String> genres) {
+        List<Long> movieGenreList = new ArrayList<>();
+        for(String name: genres){
+            Optional<Genre> genre = genreRepository.findOptionalByName(name);
+            if(genre.isPresent()){
+                movieGenreList.add(genre.get().getId());
+            }else {
+                Genre myGenre= Genre.builder().name(name).build();
+                genreRepository.save(myGenre);
+                movieGenreList.add(myGenre.getId());
+            }
+        }
+        return movieGenreList;
     }
 }
