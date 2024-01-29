@@ -2,6 +2,7 @@ package com.bilgeadam.service;
 
 import com.bilgeadam.dto.request.LoginRequestDto;
 import com.bilgeadam.dto.request.RegisterRequestDto;
+import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.entity.User;
@@ -31,6 +32,30 @@ public class UserService implements ICrudService<User, Long> {
     @Override
     public User update(User user) {
         return null;
+    }
+
+    // Güncellemeye başka parametre gelirse ne olacak?
+    // Kullanıcı aşağıdaki parametrelerden birisini JSON body'de hiç girmezse ne olacak?
+    public User updateDto(UserUpdateRequestDto dto){
+        Optional<User> optionalUser = userRepository.findById(dto.getId());
+        if(optionalUser.isPresent()){
+            optionalUser.get().setName(dto.getName());
+            optionalUser.get().setSurname(dto.getSurname());
+            optionalUser.get().setEmail(dto.getEmail());
+            optionalUser.get().setPhone(dto.getPhone());
+            return userRepository.save(optionalUser.get());
+        } else {
+            throw new NullPointerException("Kullanıcı bulunamadı...");
+        }
+    }
+
+    public User updateMapper(UserUpdateRequestDto dto){
+        Optional<User> optionalUser = userRepository.findById(dto.getId());
+        if(optionalUser.isEmpty()){
+            throw new NullPointerException("Kullanıcı bulunamadı...");
+        }
+        UserMapper.INSTANCE.updateUserFromDto(dto,optionalUser.get());
+        return userRepository.save(optionalUser.get());
     }
 
     @Override

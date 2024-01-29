@@ -2,6 +2,7 @@ package com.bilgeadam.controller;
 
 import com.bilgeadam.dto.request.LoginRequestDto;
 import com.bilgeadam.dto.request.RegisterRequestDto;
+import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.entity.User;
@@ -123,4 +124,13 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllByEmailEndingWith(value));
     }
 
+    @PostMapping("/update-dto")
+    public ResponseEntity<User> updateDto(UserUpdateRequestDto dto) {
+        return ResponseEntity.ok(userService.updateDto(dto));
+    }
+
+    @PostMapping("/update-mapper")
+    public ResponseEntity<User> updateMapper(UserUpdateRequestDto dto) {
+        return ResponseEntity.ok(userService.updateMapper(dto));
+    }
 }

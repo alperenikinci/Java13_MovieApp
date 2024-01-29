@@ -1,11 +1,11 @@
 package com.bilgeadam.mapper;
 
 import com.bilgeadam.dto.request.RegisterRequestDto;
+import com.bilgeadam.dto.request.UserUpdateRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
 import com.bilgeadam.dto.response.RegisterResponseDto;
 import com.bilgeadam.entity.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -18,4 +18,6 @@ public interface UserMapper {
 
     RegisterResponseDto fromUserToRegisterResponseDto(final User user);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateUserFromDto(UserUpdateRequestDto dto, @MappingTarget User user);
 }
