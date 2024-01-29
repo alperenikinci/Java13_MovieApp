@@ -45,7 +45,7 @@ public class MovieController {
     }
 
     @GetMapping("/find-by-rating-in")
-    public ResponseEntity<List<Movie>> findByRatingIn(List<Double> ratings){
+    public ResponseEntity<List<Movie>> findByRatingIn(){
         return ResponseEntity.ok(movieService.findByRatingIn(List.of(7D,8D,9D)));
     }
 }
